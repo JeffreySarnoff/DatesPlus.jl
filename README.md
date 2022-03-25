@@ -8,8 +8,12 @@
 
 ### source file modifications
 
-- Dates.jl
-    -- renamed DatesPlus.jl (to match module name)
+- renaming the module
+  * Dates.jl renamed DatesPlus.jl
+    * `module DatesPlus`
+  * ranges.jl
+    * `StepRange{<:DatesPlus.DatePeriod,<:Real}(start, step, stop) =`
+
 
 - io.jl
 
