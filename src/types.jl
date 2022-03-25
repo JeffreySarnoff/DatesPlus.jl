@@ -325,7 +325,7 @@ end
     DateTime(periods::Period...) -> DateTime
 
 Construct a `DateTime` type by `Period` type parts. Arguments may be in any order. DateTime
-parts not provided will default to the value of `Dates.default(period)`.
+parts not provided will default to the value of `DatesPlus.default(period)`.
 """
 function DateTime(period::Period, periods::Period...)
     y = Year(1); m = Month(1); d = Day(1)
@@ -346,7 +346,7 @@ end
     Date(period::Period...) -> Date
 
 Construct a `Date` type by `Period` type parts. Arguments may be in any order. `Date` parts
-not provided will default to the value of `Dates.default(period)`.
+not provided will default to the value of `DatesPlus.default(period)`.
 """
 function Date(period::Period, periods::Period...)
     y = Year(1); m = Month(1); d = Day(1)
@@ -362,7 +362,7 @@ end
     Time(period::TimePeriod...) -> Time
 
 Construct a `Time` type by `Period` type parts. Arguments may be in any order. `Time` parts
-not provided will default to the value of `Dates.default(period)`.
+not provided will default to the value of `DatesPlus.default(period)`.
 """
 function Time(period::TimePeriod, periods::TimePeriod...)
     h = Hour(0); mi = Minute(0); s = Second(0)

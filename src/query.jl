@@ -93,10 +93,10 @@ Return 366 if the year of `dt` is a leap year, otherwise return 365.
 
 # Examples
 ```jldoctest
-julia> Dates.daysinyear(1999)
+julia> DatesPlus.daysinyear(1999)
 365
 
-julia> Dates.daysinyear(2000)
+julia> DatesPlus.daysinyear(2000)
 366
 ```
 """
@@ -114,7 +114,7 @@ Return the day of the week as an [`Int128`](@ref) with `1 = Monday, 2 = Tuesday,
 
 # Examples
 ```jldoctest
-julia> Dates.dayofweek(Date("2000-01-01"))
+julia> DatesPlus.dayofweek(Date("2000-01-01"))
 6
 ```
 """
@@ -159,10 +159,10 @@ the given `locale`. Also accepts `Integer`.
 
 # Examples
 ```jldoctest
-julia> Dates.dayname(Date("2000-01-01"))
+julia> DatesPlus.dayname(Date("2000-01-01"))
 "Saturday"
 
-julia> Dates.dayname(4)
+julia> DatesPlus.dayname(4)
 "Thursday"
 ```
 """
@@ -179,10 +179,10 @@ in the given `locale`. Also accepts `Integer`.
 
 # Examples
 ```jldoctest
-julia> Dates.dayabbr(Date("2000-01-01"))
+julia> DatesPlus.dayabbr(Date("2000-01-01"))
 "Sat"
 
-julia> Dates.dayabbr(3)
+julia> DatesPlus.dayabbr(3)
 "Wed"
 ```
 """
@@ -209,13 +209,13 @@ month, etc.` In the range 1:5.
 
 # Examples
 ```jldoctest
-julia> Dates.dayofweekofmonth(Date("2000-02-01"))
+julia> DatesPlus.dayofweekofmonth(Date("2000-02-01"))
 1
 
-julia> Dates.dayofweekofmonth(Date("2000-02-08"))
+julia> DatesPlus.dayofweekofmonth(Date("2000-02-08"))
 2
 
-julia> Dates.dayofweekofmonth(Date("2000-02-15"))
+julia> DatesPlus.dayofweekofmonth(Date("2000-02-15"))
 3
 ```
 """
@@ -240,10 +240,10 @@ function.
 
 # Examples
 ```jldoctest
-julia> Dates.daysofweekinmonth(Date("2005-01-01"))
+julia> DatesPlus.daysofweekinmonth(Date("2005-01-01"))
 5
 
-julia> Dates.daysofweekinmonth(Date("2005-01-04"))
+julia> DatesPlus.daysofweekinmonth(Date("2005-01-04"))
 4
 ```
 """
@@ -569,10 +569,10 @@ Return the full name of the month of the `Date` or `DateTime` or `Integer` in th
 
 # Examples
 ```jldoctest
-julia> Dates.monthname(Date("2005-01-04"))
+julia> DatesPlus.monthname(Date("2005-01-04"))
 "January"
 
-julia> Dates.monthname(2)
+julia> DatesPlus.monthname(2)
 "February"
 ```
 """
@@ -588,7 +588,7 @@ Return the abbreviated month name of the `Date` or `DateTime` or `Integer` in th
 
 # Examples
 ```jldoctest
-julia> Dates.monthabbr(Date("2005-01-04"))
+julia> DatesPlus.monthabbr(Date("2005-01-04"))
 "Jan"
 
 julia> monthabbr(2)
@@ -606,13 +606,13 @@ Return the number of days in the month of `dt`. Value will be 28, 29, 30, or 31.
 
 # Examples
 ```jldoctest
-julia> Dates.daysinmonth(Date("2000-01"))
+julia> DatesPlus.daysinmonth(Date("2000-01"))
 31
 
-julia> Dates.daysinmonth(Date("2001-02"))
+julia> DatesPlus.daysinmonth(Date("2001-02"))
 28
 
-julia> Dates.daysinmonth(Date("2000-02"))
+julia> DatesPlus.daysinmonth(Date("2000-02"))
 29
 ```
 """
@@ -626,10 +626,10 @@ Return `true` if the year of `dt` is a leap year.
 
 # Examples
 ```jldoctest
-julia> Dates.isleapyear(Date("2004"))
+julia> DatesPlus.isleapyear(Date("2004"))
 true
 
-julia> Dates.isleapyear(Date("2005"))
+julia> DatesPlus.isleapyear(Date("2005"))
 false
 ```
 """

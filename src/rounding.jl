@@ -90,17 +90,17 @@ end
 Round `x` down to the nearest multiple of `precision`. If `x` and `precision` are different
 subtypes of `Period`, the return value will have the same type as `precision`.
 
-For convenience, `precision` may be a type instead of a value: `floor(x, Dates.Hour)` is a
-shortcut for `floor(x, Dates.Hour(1))`.
+For convenience, `precision` may be a type instead of a value: `floor(x, DatesPlus.Hour)` is a
+shortcut for `floor(x, DatesPlus.Hour(1))`.
 
 ```jldoctest
-julia> floor(Dates.Day(16), Dates.Week)
+julia> floor(DatesPlus.Day(16), DatesPlus.Week)
 2 weeks
 
-julia> floor(Dates.Minute(44), Dates.Minute(15))
+julia> floor(DatesPlus.Minute(44), DatesPlus.Minute(15))
 30 minutes
 
-julia> floor(Dates.Hour(36), Dates.Day)
+julia> floor(DatesPlus.Hour(36), DatesPlus.Day)
 1 day
 ```
 
@@ -118,38 +118,38 @@ end
 
 Return the nearest `Date` or `DateTime` less than or equal to `dt` at resolution `p`.
 
-For convenience, `p` may be a type instead of a value: `floor(dt, Dates.Hour)` is a shortcut
-for `floor(dt, Dates.Hour(1))`.
+For convenience, `p` may be a type instead of a value: `floor(dt, DatesPlus.Hour)` is a shortcut
+for `floor(dt, DatesPlus.Hour(1))`.
 
 ```jldoctest
-julia> floor(Date(1985, 8, 16), Dates.Month)
+julia> floor(Date(1985, 8, 16), DatesPlus.Month)
 1985-08-01
 
-julia> floor(DateTime(2013, 2, 13, 0, 31, 20), Dates.Minute(15))
+julia> floor(DateTime(2013, 2, 13, 0, 31, 20), DatesPlus.Minute(15))
 2013-02-13T00:30:00
 
-julia> floor(DateTime(2016, 8, 6, 12, 0, 0), Dates.Day)
+julia> floor(DateTime(2016, 8, 6, 12, 0, 0), DatesPlus.Day)
 2016-08-06T00:00:00
 ```
 """
-Base.floor(::Dates.TimeType, ::Dates.Period)
+Base.floor(::DatesPlus.TimeType, ::DatesPlus.Period)
 
 """
     ceil(dt::TimeType, p::Period) -> TimeType
 
 Return the nearest `Date` or `DateTime` greater than or equal to `dt` at resolution `p`.
 
-For convenience, `p` may be a type instead of a value: `ceil(dt, Dates.Hour)` is a shortcut
-for `ceil(dt, Dates.Hour(1))`.
+For convenience, `p` may be a type instead of a value: `ceil(dt, DatesPlus.Hour)` is a shortcut
+for `ceil(dt, DatesPlus.Hour(1))`.
 
 ```jldoctest
-julia> ceil(Date(1985, 8, 16), Dates.Month)
+julia> ceil(Date(1985, 8, 16), DatesPlus.Month)
 1985-09-01
 
-julia> ceil(DateTime(2013, 2, 13, 0, 31, 20), Dates.Minute(15))
+julia> ceil(DateTime(2013, 2, 13, 0, 31, 20), DatesPlus.Minute(15))
 2013-02-13T00:45:00
 
-julia> ceil(DateTime(2016, 8, 6, 12, 0, 0), Dates.Day)
+julia> ceil(DateTime(2016, 8, 6, 12, 0, 0), DatesPlus.Day)
 2016-08-07T00:00:00
 ```
 """
@@ -164,17 +164,17 @@ end
 Round `x` up to the nearest multiple of `precision`. If `x` and `precision` are different
 subtypes of `Period`, the return value will have the same type as `precision`.
 
-For convenience, `precision` may be a type instead of a value: `ceil(x, Dates.Hour)` is a
-shortcut for `ceil(x, Dates.Hour(1))`.
+For convenience, `precision` may be a type instead of a value: `ceil(x, DatesPlus.Hour)` is a
+shortcut for `ceil(x, DatesPlus.Hour(1))`.
 
 ```jldoctest
-julia> ceil(Dates.Day(16), Dates.Week)
+julia> ceil(DatesPlus.Day(16), DatesPlus.Week)
 3 weeks
 
-julia> ceil(Dates.Minute(44), Dates.Minute(15))
+julia> ceil(DatesPlus.Minute(44), DatesPlus.Minute(15))
 45 minutes
 
-julia> ceil(Dates.Hour(36), Dates.Day)
+julia> ceil(DatesPlus.Hour(36), DatesPlus.Day)
 2 days
 ```
 
@@ -214,17 +214,17 @@ end
 Return the `Date` or `DateTime` nearest to `dt` at resolution `p`. By default
 (`RoundNearestTiesUp`), ties (e.g., rounding 9:30 to the nearest hour) will be rounded up.
 
-For convenience, `p` may be a type instead of a value: `round(dt, Dates.Hour)` is a shortcut
-for `round(dt, Dates.Hour(1))`.
+For convenience, `p` may be a type instead of a value: `round(dt, DatesPlus.Hour)` is a shortcut
+for `round(dt, DatesPlus.Hour(1))`.
 
 ```jldoctest
-julia> round(Date(1985, 8, 16), Dates.Month)
+julia> round(Date(1985, 8, 16), DatesPlus.Month)
 1985-08-01
 
-julia> round(DateTime(2013, 2, 13, 0, 31, 20), Dates.Minute(15))
+julia> round(DateTime(2013, 2, 13, 0, 31, 20), DatesPlus.Minute(15))
 2013-02-13T00:30:00
 
-julia> round(DateTime(2016, 8, 6, 12, 0, 0), Dates.Day)
+julia> round(DateTime(2016, 8, 6, 12, 0, 0), DatesPlus.Day)
 2016-08-07T00:00:00
 ```
 
@@ -244,17 +244,17 @@ subtypes of `Period`, the return value will have the same type as `precision`. B
 (`RoundNearestTiesUp`), ties (e.g., rounding 90 minutes to the nearest hour) will be rounded
 up.
 
-For convenience, `precision` may be a type instead of a value: `round(x, Dates.Hour)` is a
-shortcut for `round(x, Dates.Hour(1))`.
+For convenience, `precision` may be a type instead of a value: `round(x, DatesPlus.Hour)` is a
+shortcut for `round(x, DatesPlus.Hour(1))`.
 
 ```jldoctest
-julia> round(Dates.Day(16), Dates.Week)
+julia> round(DatesPlus.Day(16), DatesPlus.Week)
 2 weeks
 
-julia> round(Dates.Minute(44), Dates.Minute(15))
+julia> round(DatesPlus.Minute(44), DatesPlus.Minute(15))
 45 minutes
 
-julia> round(Dates.Hour(36), Dates.Day)
+julia> round(DatesPlus.Hour(36), DatesPlus.Day)
 2 days
 ```
 

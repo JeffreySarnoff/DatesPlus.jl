@@ -6,92 +6,92 @@ using Dates
 using Test
 
 @testset "basic arithmetic" begin
-    @test -Dates.Year(1) == Dates.Year(-1)
-    @test Dates.Year(1) > Dates.Year(0)
-    @test (Dates.Year(1) < Dates.Year(0)) == false
-    @test Dates.Year(1) == Dates.Year(1)
-    @test Dates.Year(1) != 1
-    @test Dates.Year(1) + Dates.Year(1) == Dates.Year(2)
-    @test Dates.Year(1) - Dates.Year(1) == zero(Dates.Year)
-    @test 1 == one(Dates.Year)
-    @test_throws MethodError Dates.Year(1) * Dates.Year(1) == Dates.Year(1)
-    t = Dates.Year(1)
-    t2 = Dates.Year(2)
-    @test ([t, t, t, t, t] .+ Dates.Year(1)) == ([t2, t2, t2, t2, t2])
-    @test (Dates.Year(1) .+ [t, t, t, t, t]) == ([t2, t2, t2, t2, t2])
-    @test ([t2, t2, t2, t2, t2] .- Dates.Year(1)) == ([t, t, t, t, t])
-    @test_throws MethodError ([t, t, t, t, t] .* Dates.Year(1)) == ([t, t, t, t, t])
+    @test -DatesPlus.Year(1) == DatesPlus.Year(-1)
+    @test DatesPlus.Year(1) > DatesPlus.Year(0)
+    @test (DatesPlus.Year(1) < DatesPlus.Year(0)) == false
+    @test DatesPlus.Year(1) == DatesPlus.Year(1)
+    @test DatesPlus.Year(1) != 1
+    @test DatesPlus.Year(1) + DatesPlus.Year(1) == DatesPlus.Year(2)
+    @test DatesPlus.Year(1) - DatesPlus.Year(1) == zero(DatesPlus.Year)
+    @test 1 == one(DatesPlus.Year)
+    @test_throws MethodError DatesPlus.Year(1) * DatesPlus.Year(1) == DatesPlus.Year(1)
+    t = DatesPlus.Year(1)
+    t2 = DatesPlus.Year(2)
+    @test ([t, t, t, t, t] .+ DatesPlus.Year(1)) == ([t2, t2, t2, t2, t2])
+    @test (DatesPlus.Year(1) .+ [t, t, t, t, t]) == ([t2, t2, t2, t2, t2])
+    @test ([t2, t2, t2, t2, t2] .- DatesPlus.Year(1)) == ([t, t, t, t, t])
+    @test_throws MethodError ([t, t, t, t, t] .* DatesPlus.Year(1)) == ([t, t, t, t, t])
     @test ([t, t, t, t, t] * 1) == ([t, t, t, t, t])
     @test ([t, t, t, t, t] .% t2) == ([t, t, t, t, t])
-    @test div.([t, t, t, t, t], Dates.Year(1)) == ([1, 1, 1, 1, 1])
-    @test mod.([t, t, t, t, t], Dates.Year(2)) == ([t, t, t, t, t])
+    @test div.([t, t, t, t, t], DatesPlus.Year(1)) == ([1, 1, 1, 1, 1])
+    @test mod.([t, t, t, t, t], DatesPlus.Year(2)) == ([t, t, t, t, t])
     @test [t, t, t] / t2 == [0.5, 0.5, 0.5]
     @test abs(-t) == t
     @test sign(t) == sign(t2) == 1
     @test sign(-t) == sign(-t2) == -1
-    @test sign(Dates.Year(0)) == 0
+    @test sign(DatesPlus.Year(0)) == 0
 end
 @testset "div/mod/gcd/lcm/rem" begin
-    @test Dates.Year(10) % Dates.Year(4) == Dates.Year(2)
-    @test gcd(Dates.Year(10), Dates.Year(4)) == Dates.Year(2)
-    @test lcm(Dates.Year(10), Dates.Year(4)) == Dates.Year(20)
-    @test div(Dates.Year(10), Dates.Year(3)) == 3
-    @test div(Dates.Year(10), Dates.Year(4)) == 2
-    @test div(Dates.Year(10), 4) == Dates.Year(2)
-    @test Dates.Year(10) / Dates.Year(4) == 2.5
+    @test DatesPlus.Year(10) % DatesPlus.Year(4) == DatesPlus.Year(2)
+    @test gcd(DatesPlus.Year(10), DatesPlus.Year(4)) == DatesPlus.Year(2)
+    @test lcm(DatesPlus.Year(10), DatesPlus.Year(4)) == DatesPlus.Year(20)
+    @test div(DatesPlus.Year(10), DatesPlus.Year(3)) == 3
+    @test div(DatesPlus.Year(10), DatesPlus.Year(4)) == 2
+    @test div(DatesPlus.Year(10), 4) == DatesPlus.Year(2)
+    @test DatesPlus.Year(10) / DatesPlus.Year(4) == 2.5
 
-    @test mod(Dates.Year(10), Dates.Year(4)) == Dates.Year(2)
-    @test mod(Dates.Year(-10), Dates.Year(4)) == Dates.Year(2)
-    @test mod(Dates.Year(10), 4) == Dates.Year(2)
-    @test mod(Dates.Year(-10), 4) == Dates.Year(2)
+    @test mod(DatesPlus.Year(10), DatesPlus.Year(4)) == DatesPlus.Year(2)
+    @test mod(DatesPlus.Year(-10), DatesPlus.Year(4)) == DatesPlus.Year(2)
+    @test mod(DatesPlus.Year(10), 4) == DatesPlus.Year(2)
+    @test mod(DatesPlus.Year(-10), 4) == DatesPlus.Year(2)
 
-    @test rem(Dates.Year(10), Dates.Year(4)) == Dates.Year(2)
-    @test rem(Dates.Year(-10), Dates.Year(4)) == Dates.Year(-2)
-    @test rem(Dates.Year(10), 4) == Dates.Year(2)
-    @test rem(Dates.Year(-10), 4) == Dates.Year(-2)
+    @test rem(DatesPlus.Year(10), DatesPlus.Year(4)) == DatesPlus.Year(2)
+    @test rem(DatesPlus.Year(-10), DatesPlus.Year(4)) == DatesPlus.Year(-2)
+    @test rem(DatesPlus.Year(10), 4) == DatesPlus.Year(2)
+    @test rem(DatesPlus.Year(-10), 4) == DatesPlus.Year(-2)
 end
 
-y = Dates.Year(1)
-q = Dates.Quarter(1)
-m = Dates.Month(1)
-w = Dates.Week(1)
-d = Dates.Day(1)
-h = Dates.Hour(1)
-mi = Dates.Minute(1)
-s = Dates.Second(1)
-ms = Dates.Millisecond(1)
-us = Dates.Microsecond(1)
-ns = Dates.Nanosecond(1)
+y = DatesPlus.Year(1)
+q = DatesPlus.Quarter(1)
+m = DatesPlus.Month(1)
+w = DatesPlus.Week(1)
+d = DatesPlus.Day(1)
+h = DatesPlus.Hour(1)
+mi = DatesPlus.Minute(1)
+s = DatesPlus.Second(1)
+ms = DatesPlus.Millisecond(1)
+us = DatesPlus.Microsecond(1)
+ns = DatesPlus.Nanosecond(1)
 emptyperiod = ((y + d) - d) - y
 @testset "Period arithmetic" begin
-    @test Dates.Year(y) == y
-    @test Dates.Quarter(q) == q
-    @test Dates.Month(m) == m
-    @test Dates.Week(w) == w
-    @test Dates.Day(d) == d
-    @test Dates.Hour(h) == h
-    @test Dates.Minute(mi) == mi
-    @test Dates.Second(s) == s
-    @test Dates.Millisecond(ms) == ms
-    @test Dates.Microsecond(us) == us
-    @test Dates.Nanosecond(ns) == ns
-    @test Dates.Year(convert(Int8, 1)) == y
-    @test Dates.Year(convert(UInt8, 1)) == y
-    @test Dates.Year(convert(Int16, 1)) == y
-    @test Dates.Year(convert(UInt16, 1)) == y
-    @test Dates.Year(convert(Int32, 1)) == y
-    @test Dates.Year(convert(UInt32, 1)) == y
-    @test Dates.Year(convert(Int64, 1)) == y
-    @test Dates.Year(convert(UInt64, 1)) == y
-    @test Dates.Year(convert(Int128, 1)) == y
-    @test Dates.Year(convert(UInt128, 1)) == y
-    @test Dates.Year(convert(BigInt, 1)) == y
-    @test Dates.Year(convert(BigFloat, 1)) == y
-    @test Dates.Year(convert(Complex, 1)) == y
-    @test Dates.Year(convert(Rational, 1)) == y
-    @test Dates.Year(convert(Float16, 1)) == y
-    @test Dates.Year(convert(Float32, 1)) == y
-    @test Dates.Year(convert(Float64, 1)) == y
+    @test DatesPlus.Year(y) == y
+    @test DatesPlus.Quarter(q) == q
+    @test DatesPlus.Month(m) == m
+    @test DatesPlus.Week(w) == w
+    @test DatesPlus.Day(d) == d
+    @test DatesPlus.Hour(h) == h
+    @test DatesPlus.Minute(mi) == mi
+    @test DatesPlus.Second(s) == s
+    @test DatesPlus.Millisecond(ms) == ms
+    @test DatesPlus.Microsecond(us) == us
+    @test DatesPlus.Nanosecond(ns) == ns
+    @test DatesPlus.Year(convert(Int8, 1)) == y
+    @test DatesPlus.Year(convert(UInt8, 1)) == y
+    @test DatesPlus.Year(convert(Int16, 1)) == y
+    @test DatesPlus.Year(convert(UInt16, 1)) == y
+    @test DatesPlus.Year(convert(Int32, 1)) == y
+    @test DatesPlus.Year(convert(UInt32, 1)) == y
+    @test DatesPlus.Year(convert(Int64, 1)) == y
+    @test DatesPlus.Year(convert(UInt64, 1)) == y
+    @test DatesPlus.Year(convert(Int128, 1)) == y
+    @test DatesPlus.Year(convert(UInt128, 1)) == y
+    @test DatesPlus.Year(convert(BigInt, 1)) == y
+    @test DatesPlus.Year(convert(BigFloat, 1)) == y
+    @test DatesPlus.Year(convert(Complex, 1)) == y
+    @test DatesPlus.Year(convert(Rational, 1)) == y
+    @test DatesPlus.Year(convert(Float16, 1)) == y
+    @test DatesPlus.Year(convert(Float32, 1)) == y
+    @test DatesPlus.Year(convert(Float64, 1)) == y
     @test y == y
     @test m == m
     @test w == w
@@ -102,56 +102,56 @@ emptyperiod = ((y + d) - d) - y
     @test ms == ms
     @test us == us
     @test ns == ns
-    y2 = Dates.Year(2)
+    y2 = DatesPlus.Year(2)
     @test y < y2
     @test y2 > y
     @test y != y2
 
-    @test Dates.Year(Int8(1)) == y
-    @test Dates.Year(UInt8(1)) == y
-    @test Dates.Year(Int16(1)) == y
-    @test Dates.Year(UInt16(1)) == y
-    @test Dates.Year(Int(1)) == y
-    @test Dates.Year(UInt(1)) == y
-    @test Dates.Year(Int64(1)) == y
-    @test Dates.Year(UInt64(1)) == y
-    @test Dates.Year(UInt128(1)) == y
-    @test Dates.Year(UInt128(1)) == y
-    @test Dates.Year(big(1)) == y
-    @test Dates.Year(BigFloat(1)) == y
-    @test Dates.Year(float(1)) == y
-    @test Dates.Year(Float32(1)) == y
-    @test Dates.Year(Rational(1)) == y
-    @test Dates.Year(complex(1)) == y
-    @test_throws InexactError Dates.Year(BigFloat(1.2)) == y
-    @test_throws InexactError Dates.Year(1.2) == y
-    @test_throws InexactError Dates.Year(Float32(1.2)) == y
-    @test_throws InexactError Dates.Year(3//4) == y
-    @test_throws InexactError Dates.Year(complex(1.2)) == y
-    @test_throws InexactError Dates.Year(Float16(1.2)) == y
-    @test Dates.Year(true) == y
-    @test Dates.Year(false) != y
-    @test_throws MethodError Dates.Year(:hey) == y
-    @test Dates.Year(real(1)) == y
-    @test_throws InexactError Dates.Year(m) == y
-    @test_throws MethodError Dates.Year(w) == y
-    @test_throws MethodError Dates.Year(d) == y
-    @test_throws MethodError Dates.Year(h) == y
-    @test_throws MethodError Dates.Year(mi) == y
-    @test_throws MethodError Dates.Year(s) == y
-    @test_throws MethodError Dates.Year(ms) == y
-    @test Dates.Year(Dates.Date(2013, 1, 1)) == Dates.Year(2013)
-    @test Dates.Year(Dates.DateTime(2013, 1, 1)) == Dates.Year(2013)
-    @test typeof(y + m) <: Dates.CompoundPeriod
-    @test typeof(m + y) <: Dates.CompoundPeriod
-    @test typeof(y + w) <: Dates.CompoundPeriod
-    @test typeof(y + d) <: Dates.CompoundPeriod
-    @test typeof(y + h) <: Dates.CompoundPeriod
-    @test typeof(y + mi) <: Dates.CompoundPeriod
-    @test typeof(y + s) <: Dates.CompoundPeriod
-    @test typeof(y + ms) <: Dates.CompoundPeriod
-    @test typeof(y + us) <: Dates.CompoundPeriod
-    @test typeof(y + ns) <: Dates.CompoundPeriod
+    @test DatesPlus.Year(Int8(1)) == y
+    @test DatesPlus.Year(UInt8(1)) == y
+    @test DatesPlus.Year(Int16(1)) == y
+    @test DatesPlus.Year(UInt16(1)) == y
+    @test DatesPlus.Year(Int(1)) == y
+    @test DatesPlus.Year(UInt(1)) == y
+    @test DatesPlus.Year(Int64(1)) == y
+    @test DatesPlus.Year(UInt64(1)) == y
+    @test DatesPlus.Year(UInt128(1)) == y
+    @test DatesPlus.Year(UInt128(1)) == y
+    @test DatesPlus.Year(big(1)) == y
+    @test DatesPlus.Year(BigFloat(1)) == y
+    @test DatesPlus.Year(float(1)) == y
+    @test DatesPlus.Year(Float32(1)) == y
+    @test DatesPlus.Year(Rational(1)) == y
+    @test DatesPlus.Year(complex(1)) == y
+    @test_throws InexactError DatesPlus.Year(BigFloat(1.2)) == y
+    @test_throws InexactError DatesPlus.Year(1.2) == y
+    @test_throws InexactError DatesPlus.Year(Float32(1.2)) == y
+    @test_throws InexactError DatesPlus.Year(3//4) == y
+    @test_throws InexactError DatesPlus.Year(complex(1.2)) == y
+    @test_throws InexactError DatesPlus.Year(Float16(1.2)) == y
+    @test DatesPlus.Year(true) == y
+    @test DatesPlus.Year(false) != y
+    @test_throws MethodError DatesPlus.Year(:hey) == y
+    @test DatesPlus.Year(real(1)) == y
+    @test_throws InexactError DatesPlus.Year(m) == y
+    @test_throws MethodError DatesPlus.Year(w) == y
+    @test_throws MethodError DatesPlus.Year(d) == y
+    @test_throws MethodError DatesPlus.Year(h) == y
+    @test_throws MethodError DatesPlus.Year(mi) == y
+    @test_throws MethodError DatesPlus.Year(s) == y
+    @test_throws MethodError DatesPlus.Year(ms) == y
+    @test DatesPlus.Year(DatesPlus.Date(2013, 1, 1)) == DatesPlus.Year(2013)
+    @test DatesPlus.Year(DatesPlus.DateTime(2013, 1, 1)) == DatesPlus.Year(2013)
+    @test typeof(y + m) <: DatesPlus.CompoundPeriod
+    @test typeof(m + y) <: DatesPlus.CompoundPeriod
+    @test typeof(y + w) <: DatesPlus.CompoundPeriod
+    @test typeof(y + d) <: DatesPlus.CompoundPeriod
+    @test typeof(y + h) <: DatesPlus.CompoundPeriod
+    @test typeof(y + mi) <: DatesPlus.CompoundPeriod
+    @test typeof(y + s) <: DatesPlus.CompoundPeriod
+    @test typeof(y + ms) <: DatesPlus.CompoundPeriod
+    @test typeof(y + us) <: DatesPlus.CompoundPeriod
+    @test typeof(y + ns) <: DatesPlus.CompoundPeriod
     @test y > m
     @test d < w
     @test mi < h
@@ -162,187 +162,187 @@ emptyperiod = ((y + d) - d) - y
     @test ns < us
     @test ns < w
     @test us < w
-    @test typemax(Dates.Year) == Dates.Year(typemax(Int64))
-    @test typemax(Dates.Year) + y == Dates.Year(-9223372036854775808)
-    @test typemin(Dates.Year) == Dates.Year(-9223372036854775808)
+    @test typemax(DatesPlus.Year) == DatesPlus.Year(typemax(Int64))
+    @test typemax(DatesPlus.Year) + y == DatesPlus.Year(-9223372036854775808)
+    @test typemin(DatesPlus.Year) == DatesPlus.Year(-9223372036854775808)
 end
 @testset "Period-Real arithmetic" begin
-    @test_throws MethodError y + 1 == Dates.Year(2)
-    @test_throws MethodError y + true == Dates.Year(2)
-    @test_throws InexactError y + Dates.Year(1.2)
-    @test y + Dates.Year(1f0) == Dates.Year(2)
-    @test y * 4 == Dates.Year(4)
-    @test y * 4f0 == Dates.Year(4)
-    @test Dates.Year(2) * 0.5 == y
-    @test Dates.Year(2) * 3//2 == Dates.Year(3)
+    @test_throws MethodError y + 1 == DatesPlus.Year(2)
+    @test_throws MethodError y + true == DatesPlus.Year(2)
+    @test_throws InexactError y + DatesPlus.Year(1.2)
+    @test y + DatesPlus.Year(1f0) == DatesPlus.Year(2)
+    @test y * 4 == DatesPlus.Year(4)
+    @test y * 4f0 == DatesPlus.Year(4)
+    @test DatesPlus.Year(2) * 0.5 == y
+    @test DatesPlus.Year(2) * 3//2 == DatesPlus.Year(3)
     @test_throws InexactError y * 0.5
     @test_throws InexactError y * 3//4
     @test (1:1:5)*Second(5) === Second(5)*(1:1:5) === Second(5):Second(5):Second(25) === (1:5)*Second(5)
     @test collect(1:1:5)*Second(5) == Second(5)*collect(1:1:5) == (1:5)*Second(5)
     @test (Second(2):Second(2):Second(10))/Second(2) === 1.0:1.0:5.0 == collect(Second(2):Second(2):Second(10))/Second(2)
     @test (Second(2):Second(2):Second(10)) / 2 == Second(1):Second(1):Second(5) == collect(Second(2):Second(2):Second(10)) / 2
-    @test Dates.Year(4) / 2 == Dates.Year(2)
-    @test Dates.Year(4) / 2f0 == Dates.Year(2)
-    @test Dates.Year(4) / 0.5 == Dates.Year(8)
-    @test Dates.Year(4) / 2//3 == Dates.Year(6)
-    @test_throws InexactError Dates.Year(4) / 3.0
-    @test_throws InexactError Dates.Year(4) / 3//2
-    @test div(y, 2) == Dates.Year(0)
-    @test_throws MethodError div(2, y) == Dates.Year(2)
+    @test DatesPlus.Year(4) / 2 == DatesPlus.Year(2)
+    @test DatesPlus.Year(4) / 2f0 == DatesPlus.Year(2)
+    @test DatesPlus.Year(4) / 0.5 == DatesPlus.Year(8)
+    @test DatesPlus.Year(4) / 2//3 == DatesPlus.Year(6)
+    @test_throws InexactError DatesPlus.Year(4) / 3.0
+    @test_throws InexactError DatesPlus.Year(4) / 3//2
+    @test div(y, 2) == DatesPlus.Year(0)
+    @test_throws MethodError div(2, y) == DatesPlus.Year(2)
     @test div(y, y) == 1
-    @test y*10 % Dates.Year(5) == Dates.Year(0)
+    @test y*10 % DatesPlus.Year(5) == DatesPlus.Year(0)
     @test_throws MethodError (y > 3) == false
     @test_throws MethodError (4 < y) == false
     @test 1 != y
     t = [y, y, y, y, y]
-    @test t .+ Dates.Year(2) == [Dates.Year(3), Dates.Year(3), Dates.Year(3), Dates.Year(3), Dates.Year(3)]
+    @test t .+ DatesPlus.Year(2) == [DatesPlus.Year(3), DatesPlus.Year(3), DatesPlus.Year(3), DatesPlus.Year(3), DatesPlus.Year(3)]
 
-    let x = Dates.Year(5), y = Dates.Year(2)
+    let x = DatesPlus.Year(5), y = DatesPlus.Year(2)
         @test div(x, y) * y + rem(x, y) == x
         @test fld(x, y) * y + mod(x, y) == x
     end
 end
 @testset "Associativity" begin
-    dt = Dates.DateTime(2012, 12, 21)
+    dt = DatesPlus.DateTime(2012, 12, 21)
     test = ((((((((dt + y) - m) + w) - d) + h) - mi) + s) - ms)
     @test test == dt + y - m + w - d + h - mi + s - ms
     @test test == y - m + w - d + dt + h - mi + s - ms
     @test test == dt - m + y - d + w - mi + h - ms + s
     @test test == dt + (y - m + w - d + h - mi + s - ms)
     @test test == dt + y - m + w - d + (h - mi + s - ms)
-    @test (dt + Dates.Year(4)) + Dates.Day(1) == dt + (Dates.Year(4) + Dates.Day(1))
-    @test Dates.Date(2014, 1, 29) + Dates.Month(1) + Dates.Day(1) + Dates.Month(1) + Dates.Day(1) ==
-        Dates.Date(2014, 1, 29) + Dates.Day(1) + Dates.Month(1) + Dates.Month(1) + Dates.Day(1)
-    @test Dates.Date(2014, 1, 29) + Dates.Month(1) + Dates.Day(1) == Dates.Date(2014, 1, 29) + Dates.Day(1) + Dates.Month(1)
+    @test (dt + DatesPlus.Year(4)) + DatesPlus.Day(1) == dt + (DatesPlus.Year(4) + DatesPlus.Day(1))
+    @test DatesPlus.Date(2014, 1, 29) + DatesPlus.Month(1) + DatesPlus.Day(1) + DatesPlus.Month(1) + DatesPlus.Day(1) ==
+        DatesPlus.Date(2014, 1, 29) + DatesPlus.Day(1) + DatesPlus.Month(1) + DatesPlus.Month(1) + DatesPlus.Day(1)
+    @test DatesPlus.Date(2014, 1, 29) + DatesPlus.Month(1) + DatesPlus.Day(1) == DatesPlus.Date(2014, 1, 29) + DatesPlus.Day(1) + DatesPlus.Month(1)
 end
 @testset "traits" begin
-    @test Dates._units(Dates.Year(0)) == " years"
-    @test Dates._units(Dates.Year(1)) == " year"
-    @test Dates._units(Dates.Year(-1)) == " year"
-    @test Dates._units(Dates.Year(2)) == " years"
-    @test Dates.string(Dates.Year(0)) == "0 years"
-    @test Dates.string(Dates.Year(1)) == "1 year"
-    @test Dates.string(Dates.Year(-1)) == "-1 year"
-    @test Dates.string(Dates.Year(2)) == "2 years"
-    @test isfinite(Dates.Year)
-    @test isfinite(Dates.Year(0))
-    @test zero(Dates.Year) == Dates.Year(0)
-    @test zero(Dates.Year(10)) == Dates.Year(0)
-    @test zero(Dates.Month) == Dates.Month(0)
-    @test zero(Dates.Month(10)) == Dates.Month(0)
-    @test zero(Dates.Day) == Dates.Day(0)
-    @test zero(Dates.Day(10)) == Dates.Day(0)
-    @test zero(Dates.Hour) == Dates.Hour(0)
-    @test zero(Dates.Hour(10)) == Dates.Hour(0)
-    @test zero(Dates.Minute) == Dates.Minute(0)
-    @test zero(Dates.Minute(10)) == Dates.Minute(0)
-    @test zero(Dates.Second) == Dates.Second(0)
-    @test zero(Dates.Second(10)) == Dates.Second(0)
-    @test zero(Dates.Millisecond) == Dates.Millisecond(0)
-    @test zero(Dates.Millisecond(10)) == Dates.Millisecond(0)
-    @test Dates.Year(-1) < Dates.Year(1)
-    @test !(Dates.Year(-1) > Dates.Year(1))
-    @test Dates.Year(1) == Dates.Year(1)
-    @test Dates.Year(1) != 1
-    @test 1 != Dates.Year(1)
-    @test Dates.Month(-1) < Dates.Month(1)
-    @test !(Dates.Month(-1) > Dates.Month(1))
-    @test Dates.Month(1) == Dates.Month(1)
-    @test Dates.Day(-1) < Dates.Day(1)
-    @test !(Dates.Day(-1) > Dates.Day(1))
-    @test Dates.Day(1) == Dates.Day(1)
-    @test Dates.Hour(-1) < Dates.Hour(1)
-    @test !(Dates.Hour(-1) > Dates.Hour(1))
-    @test Dates.Hour(1) == Dates.Hour(1)
-    @test Dates.Minute(-1) < Dates.Minute(1)
-    @test !(Dates.Minute(-1) > Dates.Minute(1))
-    @test Dates.Minute(1) == Dates.Minute(1)
-    @test Dates.Second(-1) < Dates.Second(1)
-    @test !(Dates.Second(-1) > Dates.Second(1))
-    @test Dates.Second(1) == Dates.Second(1)
-    @test Dates.Millisecond(-1) < Dates.Millisecond(1)
-    @test !(Dates.Millisecond(-1) > Dates.Millisecond(1))
-    @test Dates.Millisecond(1) == Dates.Millisecond(1)
-    @test_throws MethodError Dates.Year(1) < Dates.Millisecond(1)
-    @test_throws MethodError Dates.Millisecond(1) < Dates.Year(1)
+    @test DatesPlus._units(DatesPlus.Year(0)) == " years"
+    @test DatesPlus._units(DatesPlus.Year(1)) == " year"
+    @test DatesPlus._units(DatesPlus.Year(-1)) == " year"
+    @test DatesPlus._units(DatesPlus.Year(2)) == " years"
+    @test DatesPlus.string(DatesPlus.Year(0)) == "0 years"
+    @test DatesPlus.string(DatesPlus.Year(1)) == "1 year"
+    @test DatesPlus.string(DatesPlus.Year(-1)) == "-1 year"
+    @test DatesPlus.string(DatesPlus.Year(2)) == "2 years"
+    @test isfinite(DatesPlus.Year)
+    @test isfinite(DatesPlus.Year(0))
+    @test zero(DatesPlus.Year) == DatesPlus.Year(0)
+    @test zero(DatesPlus.Year(10)) == DatesPlus.Year(0)
+    @test zero(DatesPlus.Month) == DatesPlus.Month(0)
+    @test zero(DatesPlus.Month(10)) == DatesPlus.Month(0)
+    @test zero(DatesPlus.Day) == DatesPlus.Day(0)
+    @test zero(DatesPlus.Day(10)) == DatesPlus.Day(0)
+    @test zero(DatesPlus.Hour) == DatesPlus.Hour(0)
+    @test zero(DatesPlus.Hour(10)) == DatesPlus.Hour(0)
+    @test zero(DatesPlus.Minute) == DatesPlus.Minute(0)
+    @test zero(DatesPlus.Minute(10)) == DatesPlus.Minute(0)
+    @test zero(DatesPlus.Second) == DatesPlus.Second(0)
+    @test zero(DatesPlus.Second(10)) == DatesPlus.Second(0)
+    @test zero(DatesPlus.Millisecond) == DatesPlus.Millisecond(0)
+    @test zero(DatesPlus.Millisecond(10)) == DatesPlus.Millisecond(0)
+    @test DatesPlus.Year(-1) < DatesPlus.Year(1)
+    @test !(DatesPlus.Year(-1) > DatesPlus.Year(1))
+    @test DatesPlus.Year(1) == DatesPlus.Year(1)
+    @test DatesPlus.Year(1) != 1
+    @test 1 != DatesPlus.Year(1)
+    @test DatesPlus.Month(-1) < DatesPlus.Month(1)
+    @test !(DatesPlus.Month(-1) > DatesPlus.Month(1))
+    @test DatesPlus.Month(1) == DatesPlus.Month(1)
+    @test DatesPlus.Day(-1) < DatesPlus.Day(1)
+    @test !(DatesPlus.Day(-1) > DatesPlus.Day(1))
+    @test DatesPlus.Day(1) == DatesPlus.Day(1)
+    @test DatesPlus.Hour(-1) < DatesPlus.Hour(1)
+    @test !(DatesPlus.Hour(-1) > DatesPlus.Hour(1))
+    @test DatesPlus.Hour(1) == DatesPlus.Hour(1)
+    @test DatesPlus.Minute(-1) < DatesPlus.Minute(1)
+    @test !(DatesPlus.Minute(-1) > DatesPlus.Minute(1))
+    @test DatesPlus.Minute(1) == DatesPlus.Minute(1)
+    @test DatesPlus.Second(-1) < DatesPlus.Second(1)
+    @test !(DatesPlus.Second(-1) > DatesPlus.Second(1))
+    @test DatesPlus.Second(1) == DatesPlus.Second(1)
+    @test DatesPlus.Millisecond(-1) < DatesPlus.Millisecond(1)
+    @test !(DatesPlus.Millisecond(-1) > DatesPlus.Millisecond(1))
+    @test DatesPlus.Millisecond(1) == DatesPlus.Millisecond(1)
+    @test_throws MethodError DatesPlus.Year(1) < DatesPlus.Millisecond(1)
+    @test_throws MethodError DatesPlus.Millisecond(1) < DatesPlus.Year(1)
 
     # issue #27076
-    @test Dates.Year(1) != Dates.Millisecond(1)
-    @test Dates.Millisecond(1) != Dates.Year(1)
+    @test DatesPlus.Year(1) != DatesPlus.Millisecond(1)
+    @test DatesPlus.Millisecond(1) != DatesPlus.Year(1)
 end
 
-struct Beat <: Dates.Period
+struct Beat <: DatesPlus.Period
     value::Int64
 end
 
-Beat(p::Period) = Beat(Dates.toms(p) ÷ 86400)
+Beat(p::Period) = Beat(DatesPlus.toms(p) ÷ 86400)
 
 @testset "comparisons with new subtypes of Period" begin
     # https://en.wikipedia.org/wiki/Swatch_Internet_Time
-    Dates.value(b::Beat) = b.value
-    Dates.toms(b::Beat) = Dates.value(b) * 86400
-    Dates._units(b::Beat) = " beat" * (abs(Dates.value(b)) == 1 ? "" : "s")
-    Base.promote_rule(::Type{Dates.Day}, ::Type{Beat}) = Dates.Millisecond
-    Base.convert(::Type{T}, b::Beat) where {T<:Dates.Millisecond} = T(Dates.toms(b))
+    DatesPlus.value(b::Beat) = b.value
+    DatesPlus.toms(b::Beat) = DatesPlus.value(b) * 86400
+    DatesPlus._units(b::Beat) = " beat" * (abs(DatesPlus.value(b)) == 1 ? "" : "s")
+    Base.promote_rule(::Type{DatesPlus.Day}, ::Type{Beat}) = DatesPlus.Millisecond
+    Base.convert(::Type{T}, b::Beat) where {T<:DatesPlus.Millisecond} = T(DatesPlus.toms(b))
 
-    @test Beat(1000) == Dates.Day(1)
-    @test Beat(1) < Dates.Day(1)
+    @test Beat(1000) == DatesPlus.Day(1)
+    @test Beat(1) < DatesPlus.Day(1)
 end
 
 @testset "basic properties" begin
-    @test Dates.Year("1") == y
-    @test Dates.Quarter("1") == q
-    @test Dates.Month("1") == m
-    @test Dates.Week("1") == w
-    @test Dates.Day("1") == d
-    @test Dates.Hour("1") == h
-    @test Dates.Minute("1") == mi
-    @test Dates.Second("1") == s
-    @test Dates.Millisecond("1") == ms
-    @test Dates.Microsecond("1") == us
-    @test Dates.Nanosecond("1") == ns
-    @test_throws ArgumentError Dates.Year("1.0")
-    @test Dates.Year(parse(Float64, "1.0")) == y
+    @test DatesPlus.Year("1") == y
+    @test DatesPlus.Quarter("1") == q
+    @test DatesPlus.Month("1") == m
+    @test DatesPlus.Week("1") == w
+    @test DatesPlus.Day("1") == d
+    @test DatesPlus.Hour("1") == h
+    @test DatesPlus.Minute("1") == mi
+    @test DatesPlus.Second("1") == s
+    @test DatesPlus.Millisecond("1") == ms
+    @test DatesPlus.Microsecond("1") == us
+    @test DatesPlus.Nanosecond("1") == ns
+    @test_throws ArgumentError DatesPlus.Year("1.0")
+    @test DatesPlus.Year(parse(Float64, "1.0")) == y
 
-    dt = Dates.DateTime(2014)
-    @test typeof(Dates.Year(dt)) <: Dates.Year
-    @test typeof(Dates.Quarter(dt)) <: Dates.Quarter
-    @test typeof(Dates.Month(dt)) <: Dates.Month
-    @test typeof(Dates.Week(dt)) <: Dates.Week
-    @test typeof(Dates.Day(dt)) <: Dates.Day
-    @test typeof(Dates.Hour(dt)) <: Dates.Hour
-    @test typeof(Dates.Minute(dt)) <: Dates.Minute
-    @test typeof(Dates.Second(dt)) <: Dates.Second
-    @test typeof(Dates.Millisecond(dt)) <: Dates.Millisecond
+    dt = DatesPlus.DateTime(2014)
+    @test typeof(DatesPlus.Year(dt)) <: DatesPlus.Year
+    @test typeof(DatesPlus.Quarter(dt)) <: DatesPlus.Quarter
+    @test typeof(DatesPlus.Month(dt)) <: DatesPlus.Month
+    @test typeof(DatesPlus.Week(dt)) <: DatesPlus.Week
+    @test typeof(DatesPlus.Day(dt)) <: DatesPlus.Day
+    @test typeof(DatesPlus.Hour(dt)) <: DatesPlus.Hour
+    @test typeof(DatesPlus.Minute(dt)) <: DatesPlus.Minute
+    @test typeof(DatesPlus.Second(dt)) <: DatesPlus.Second
+    @test typeof(DatesPlus.Millisecond(dt)) <: DatesPlus.Millisecond
 end
 @testset "Default values" begin
-    @test Dates.default(Dates.Year) == y
-    @test Dates.default(Dates.Quarter) == q
-    @test Dates.default(Dates.Month) == m
-    @test Dates.default(Dates.Week) == w
-    @test Dates.default(Dates.Day) == d
-    @test Dates.default(Dates.Hour) == zero(Dates.Hour)
-    @test Dates.default(Dates.Minute) == zero(Dates.Minute)
-    @test Dates.default(Dates.Second) == zero(Dates.Second)
-    @test Dates.default(Dates.Millisecond) == zero(Dates.Millisecond)
-    @test Dates.default(Dates.Microsecond) == zero(Dates.Microsecond)
-    @test Dates.default(Dates.Nanosecond) == zero(Dates.Nanosecond)
+    @test DatesPlus.default(DatesPlus.Year) == y
+    @test DatesPlus.default(DatesPlus.Quarter) == q
+    @test DatesPlus.default(DatesPlus.Month) == m
+    @test DatesPlus.default(DatesPlus.Week) == w
+    @test DatesPlus.default(DatesPlus.Day) == d
+    @test DatesPlus.default(DatesPlus.Hour) == zero(DatesPlus.Hour)
+    @test DatesPlus.default(DatesPlus.Minute) == zero(DatesPlus.Minute)
+    @test DatesPlus.default(DatesPlus.Second) == zero(DatesPlus.Second)
+    @test DatesPlus.default(DatesPlus.Millisecond) == zero(DatesPlus.Millisecond)
+    @test DatesPlus.default(DatesPlus.Microsecond) == zero(DatesPlus.Microsecond)
+    @test DatesPlus.default(DatesPlus.Nanosecond) == zero(DatesPlus.Nanosecond)
 end
 @testset "Conversions" begin
-    @test Dates.toms(ms) == Dates.value(Dates.Millisecond(ms)) == 1
-    @test Dates.toms(s)  == Dates.value(Dates.Millisecond(s)) == 1000
-    @test Dates.toms(mi) == Dates.value(Dates.Millisecond(mi)) == 60000
-    @test Dates.toms(h)  == Dates.value(Dates.Millisecond(h)) == 3600000
-    @test Dates.toms(d)  == Dates.value(Dates.Millisecond(d)) == 86400000
-    @test Dates.toms(w)  == Dates.value(Dates.Millisecond(w)) == 604800000
+    @test DatesPlus.toms(ms) == DatesPlus.value(DatesPlus.Millisecond(ms)) == 1
+    @test DatesPlus.toms(s)  == DatesPlus.value(DatesPlus.Millisecond(s)) == 1000
+    @test DatesPlus.toms(mi) == DatesPlus.value(DatesPlus.Millisecond(mi)) == 60000
+    @test DatesPlus.toms(h)  == DatesPlus.value(DatesPlus.Millisecond(h)) == 3600000
+    @test DatesPlus.toms(d)  == DatesPlus.value(DatesPlus.Millisecond(d)) == 86400000
+    @test DatesPlus.toms(w)  == DatesPlus.value(DatesPlus.Millisecond(w)) == 604800000
 
-    @test Dates.days(ms) == Dates.days(s) == Dates.days(mi) == Dates.days(h) == 0
-    @test Dates.days(Dates.Millisecond(86400000)) == 1
-    @test Dates.days(Dates.Second(86400)) == 1
-    @test Dates.days(Dates.Minute(1440)) == 1
-    @test Dates.days(Dates.Hour(24)) == 1
-    @test Dates.days(d) == 1
-    @test Dates.days(w) == 7
+    @test DatesPlus.days(ms) == DatesPlus.days(s) == DatesPlus.days(mi) == DatesPlus.days(h) == 0
+    @test DatesPlus.days(DatesPlus.Millisecond(86400000)) == 1
+    @test DatesPlus.days(DatesPlus.Second(86400)) == 1
+    @test DatesPlus.days(DatesPlus.Minute(1440)) == 1
+    @test DatesPlus.days(DatesPlus.Hour(24)) == 1
+    @test DatesPlus.days(d) == 1
+    @test DatesPlus.days(w) == 7
 end
 @testset "issue #9214" begin
     @test 2s + (7ms + 1ms) == (2s + 7ms) + 1ms == 1ms + (2s + 7ms) == 1ms + (1s + 7ms) + 1s == 1ms + (2s + 3d + 7ms) + (-3d) == (1ms + (2s + 3d)) + (7ms - 3d) == (1ms + (2s + 3d)) - (3d - 7ms)
@@ -358,38 +358,38 @@ end
 end
 @testset "compound periods and types" begin
     # compound periods should avoid automatically converting period types
-    @test (d - h).periods == Dates.Period[d, -h]
+    @test (d - h).periods == DatesPlus.Period[d, -h]
     @test d - h == 23h
     @test !isequal(d - h, 23h)
     @test isequal(d - h, 2d - 2h - 1d + 1h)
     @test sprint(show, y + m) == string(y + m)
-    @test convert(Dates.CompoundPeriod, y) + m == y + m
-    @test Dates.periods(convert(Dates.CompoundPeriod, y)) == convert(Dates.CompoundPeriod, y).periods
+    @test convert(DatesPlus.CompoundPeriod, y) + m == y + m
+    @test DatesPlus.periods(convert(DatesPlus.CompoundPeriod, y)) == convert(DatesPlus.CompoundPeriod, y).periods
 end
 @testset "compound period simplification" begin
     # reduce compound periods into the most basic form
-    @test Dates.canonicalize(h - mi).periods == Dates.Period[59mi]
-    @test Dates.canonicalize(-h + mi).periods == Dates.Period[-59mi]
-    @test Dates.canonicalize(-y + d).periods == Dates.Period[-y, d]
-    @test Dates.canonicalize(-y + m - w + d).periods == Dates.Period[-11m, -6d]
-    @test Dates.canonicalize(-y + m - w + ms).periods == Dates.Period[-11m, -6d, -23h, -59mi, -59s, -999ms]
-    @test Dates.canonicalize(y - m + w - d + h - mi + s - ms).periods == Dates.Period[11m, 6d, 59mi, 999ms]
-    @test Dates.canonicalize(-y + m - w + d - h + mi - s + ms).periods == Dates.Period[-11m, -6d, -59mi, -999ms]
+    @test DatesPlus.canonicalize(h - mi).periods == DatesPlus.Period[59mi]
+    @test DatesPlus.canonicalize(-h + mi).periods == DatesPlus.Period[-59mi]
+    @test DatesPlus.canonicalize(-y + d).periods == DatesPlus.Period[-y, d]
+    @test DatesPlus.canonicalize(-y + m - w + d).periods == DatesPlus.Period[-11m, -6d]
+    @test DatesPlus.canonicalize(-y + m - w + ms).periods == DatesPlus.Period[-11m, -6d, -23h, -59mi, -59s, -999ms]
+    @test DatesPlus.canonicalize(y - m + w - d + h - mi + s - ms).periods == DatesPlus.Period[11m, 6d, 59mi, 999ms]
+    @test DatesPlus.canonicalize(-y + m - w + d - h + mi - s + ms).periods == DatesPlus.Period[-11m, -6d, -59mi, -999ms]
 
-    @test Dates.Date(2009, 2, 1) - (Dates.Month(1) + Dates.Day(1)) == Dates.Date(2008, 12, 31)
-    @test_throws MethodError (Dates.Month(1) + Dates.Day(1)) - Dates.Date(2009,2,1)
+    @test DatesPlus.Date(2009, 2, 1) - (DatesPlus.Month(1) + DatesPlus.Day(1)) == DatesPlus.Date(2008, 12, 31)
+    @test_throws MethodError (DatesPlus.Month(1) + DatesPlus.Day(1)) - DatesPlus.Date(2009,2,1)
 end
 
 @testset "canonicalize Period" begin
     # reduce individual Period into most basic CompoundPeriod
-    @test Dates.canonicalize(Dates.Nanosecond(1000000)) == Dates.canonicalize(Dates.Millisecond(1))
-    @test Dates.canonicalize(Dates.Millisecond(1000)) == Dates.canonicalize(Dates.Second(1))
-    @test Dates.canonicalize(Dates.Second(60)) == Dates.canonicalize(Dates.Minute(1))
-    @test Dates.canonicalize(Dates.Minute(60)) == Dates.canonicalize(Dates.Hour(1))
-    @test Dates.canonicalize(Dates.Hour(24)) == Dates.canonicalize(Dates.Day(1))
-    @test Dates.canonicalize(Dates.Day(7)) == Dates.canonicalize(Dates.Week(1))
-    @test Dates.canonicalize(Dates.Month(12)) == Dates.canonicalize(Dates.Year(1))
-    @test Dates.canonicalize(Dates.Minute(24*60*1 + 12*60)) == Dates.canonicalize(Dates.CompoundPeriod([Dates.Day(1),Dates.Hour(12)]))
+    @test DatesPlus.canonicalize(DatesPlus.Nanosecond(1000000)) == DatesPlus.canonicalize(DatesPlus.Millisecond(1))
+    @test DatesPlus.canonicalize(DatesPlus.Millisecond(1000)) == DatesPlus.canonicalize(DatesPlus.Second(1))
+    @test DatesPlus.canonicalize(DatesPlus.Second(60)) == DatesPlus.canonicalize(DatesPlus.Minute(1))
+    @test DatesPlus.canonicalize(DatesPlus.Minute(60)) == DatesPlus.canonicalize(DatesPlus.Hour(1))
+    @test DatesPlus.canonicalize(DatesPlus.Hour(24)) == DatesPlus.canonicalize(DatesPlus.Day(1))
+    @test DatesPlus.canonicalize(DatesPlus.Day(7)) == DatesPlus.canonicalize(DatesPlus.Week(1))
+    @test DatesPlus.canonicalize(DatesPlus.Month(12)) == DatesPlus.canonicalize(DatesPlus.Year(1))
+    @test DatesPlus.canonicalize(DatesPlus.Minute(24*60*1 + 12*60)) == DatesPlus.canonicalize(DatesPlus.CompoundPeriod([DatesPlus.Day(1),DatesPlus.Hour(12)]))
 end
 @testset "unary ops and vectorized period arithmetic" begin
     pa = [1y 1m 1w 1d; 1h 1mi 1s 1ms]
@@ -441,8 +441,8 @@ end
     @test [1y + 1s 1m + 1s; 1w + 1s 1d + 1s] - [1y + 1h 1y + 1mi; 1y + 1s 1y + 1ms] == [1s-1h 1m + 1s-1y-1mi; 1w-1y 1d + 1s-1y-1ms]
 end
 @testset "Equality and hashing between FixedPeriod types" begin
-    let types = (Dates.Week, Dates.Day, Dates.Hour, Dates.Minute,
-                 Dates.Second, Dates.Millisecond, Dates.Microsecond, Dates.Nanosecond)
+    let types = (DatesPlus.Week, DatesPlus.Day, DatesPlus.Hour, DatesPlus.Minute,
+                 DatesPlus.Second, DatesPlus.Millisecond, DatesPlus.Microsecond, DatesPlus.Nanosecond)
         for i in 1:length(types), j in i:length(types), x in (0, 1, 235, -4677, 15250)
             local T, U, y, z
             T = types[i]
@@ -457,18 +457,18 @@ end
 @testset "Equality and hashing between OtherPeriod types" begin
     for x in (0, 1, 235, -4677, 15250)
         local x, y, z
-        y = Dates.Year(x)
-        z = convert(Dates.Month, y)
+        y = DatesPlus.Year(x)
+        z = convert(DatesPlus.Month, y)
         @test y == z
         @test hash(y) == hash(z)
 
-        y = Dates.Quarter(x)
-        z = convert(Dates.Month, y)
+        y = DatesPlus.Quarter(x)
+        z = convert(DatesPlus.Month, y)
         @test y == z
         @test hash(y) == hash(z)
 
-        y = Dates.Year(x)
-        z = convert(Dates.Quarter, y)
+        y = DatesPlus.Year(x)
+        z = convert(DatesPlus.Quarter, y)
         @test y == z
         @test hash(y) == hash(z)
     end
@@ -481,26 +481,26 @@ end
         @test isequal(y, x)
         @test hash(x) == hash(y)
     end
-    for FP = (Dates.Week, Dates.Day, Dates.Hour, Dates.Minute,
-              Dates.Second, Dates.Millisecond, Dates.Microsecond, Dates.Nanosecond)
-        for OP = (Dates.Year, Dates.Quarter, Dates.Month)
+    for FP = (DatesPlus.Week, DatesPlus.Day, DatesPlus.Hour, DatesPlus.Minute,
+              DatesPlus.Second, DatesPlus.Millisecond, DatesPlus.Microsecond, DatesPlus.Nanosecond)
+        for OP = (DatesPlus.Year, DatesPlus.Quarter, DatesPlus.Month)
             test_hash_equality(FP(0), OP(0))
         end
     end
 end
 @testset "Hashing for CompoundPeriod (#37447)" begin
-    periods = [Dates.Year(0), Dates.Minute(0), Dates.Second(0), Dates.CompoundPeriod(),
-               Dates.Minute(2), Dates.Second(120), Dates.CompoundPeriod(Dates.Minute(2)),
-               Dates.CompoundPeriod(Dates.Second(120)), Dates.CompoundPeriod(Dates.Minute(1), Dates.Second(60))]
+    periods = [DatesPlus.Year(0), DatesPlus.Minute(0), DatesPlus.Second(0), DatesPlus.CompoundPeriod(),
+               DatesPlus.Minute(2), DatesPlus.Second(120), DatesPlus.CompoundPeriod(DatesPlus.Minute(2)),
+               DatesPlus.CompoundPeriod(DatesPlus.Second(120)), DatesPlus.CompoundPeriod(DatesPlus.Minute(1), DatesPlus.Second(60))]
     for x = periods, y = periods
         @test isequal(x,y) == (hash(x) == hash(y))
     end
 end
 
 @testset "#30832" begin
-    @test Dates.toms(Dates.Second(1) + Dates.Nanosecond(1)) == 1e3
-    @test Dates.tons(Dates.Second(1) + Dates.Nanosecond(1)) == 1e9 + 1
-    @test Dates.toms(Dates.Second(1) + Dates.Microsecond(1)) == 1e3
+    @test DatesPlus.toms(DatesPlus.Second(1) + DatesPlus.Nanosecond(1)) == 1e3
+    @test DatesPlus.tons(DatesPlus.Second(1) + DatesPlus.Nanosecond(1)) == 1e9 + 1
+    @test DatesPlus.toms(DatesPlus.Second(1) + DatesPlus.Microsecond(1)) == 1e3
 end
 
 @testset "CompoundPeriod and Period isless()" begin
@@ -527,7 +527,7 @@ end
     @test_throws MethodError convert(Month, Minute(1) + Second(30))
     @test_throws MethodError convert(Second, Month(1) + Second(30))
     @test_throws MethodError convert(Period, Minute(1) + Second(30))
-    @test_throws MethodError convert(Dates.FixedPeriod, Minute(1) + Second(30))
+    @test_throws MethodError convert(DatesPlus.FixedPeriod, Minute(1) + Second(30))
 end
 
 end

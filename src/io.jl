@@ -475,14 +475,14 @@ end
 # Standard formats
 
 """
-    Dates.ISODateTimeFormat
+    DatesPlus.ISODateTimeFormat
 
-Describes the ISO8601 formatting for a date and time. This is the default value for `Dates.format`
+Describes the ISO8601 formatting for a date and time. This is the default value for `DatesPlus.format`
 of a `DateTime`.
 
 # Example
 ```jldoctest
-julia> Dates.format(DateTime(2018, 8, 8, 12, 0, 43, 1), ISODateTimeFormat)
+julia> DatesPlus.format(DateTime(2018, 8, 8, 12, 0, 43, 1), ISODateTimeFormat)
 "2018-08-08T12:00:43.001"
 ```
 """
@@ -490,13 +490,13 @@ const ISODateTimeFormat = DateFormat("yyyy-mm-dd\\THH:MM:SS.s")
 default_format(::Type{DateTime}) = ISODateTimeFormat
 
 """
-    Dates.ISODateFormat
+    DatesPlus.ISODateFormat
 
-Describes the ISO8601 formatting for a date. This is the default value for `Dates.format` of a `Date`.
+Describes the ISO8601 formatting for a date. This is the default value for `DatesPlus.format` of a `Date`.
 
 # Example
 ```jldoctest
-julia> Dates.format(Date(2018, 8, 8), ISODateFormat)
+julia> DatesPlus.format(Date(2018, 8, 8), ISODateFormat)
 "2018-08-08"
 ```
 """
@@ -504,13 +504,13 @@ const ISODateFormat = DateFormat("yyyy-mm-dd")
 default_format(::Type{Date}) = ISODateFormat
 
 """
-    Dates.ISOTimeFormat
+    DatesPlus.ISOTimeFormat
 
-Describes the ISO8601 formatting for a time. This is the default value for `Dates.format` of a `Time`.
+Describes the ISO8601 formatting for a time. This is the default value for `DatesPlus.format` of a `Time`.
 
 # Example
 ```jldoctest
-julia> Dates.format(Time(12, 0, 43, 1), ISOTimeFormat)
+julia> DatesPlus.format(Time(12, 0, 43, 1), ISOTimeFormat)
 "12:00:43.001"
 ```
 """
@@ -518,13 +518,13 @@ const ISOTimeFormat = DateFormat("HH:MM:SS.s")
 default_format(::Type{Time}) = ISOTimeFormat
 
 """
-    Dates.RFC1123Format
+    DatesPlus.RFC1123Format
 
 Describes the RFC1123 formatting for a date and time.
 
 # Example
 ```jldoctest
-julia> Dates.format(DateTime(2018, 8, 8, 12, 0, 43, 1), RFC1123Format)
+julia> DatesPlus.format(DateTime(2018, 8, 8, 12, 0, 43, 1), RFC1123Format)
 "Wed, 08 Aug 2018 12:00:43"
 ```
 """

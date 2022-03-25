@@ -2,7 +2,7 @@
 
 #Period types
 """
-    Dates.value(x::Period) -> Int128
+    DatesPlus.value(x::Period) -> Int128
 
 For a given period, return the value associated with that period.  For example,
 `value(Millisecond(10))` returns 10 as an integer.
@@ -200,7 +200,7 @@ struct CompoundPeriod <: AbstractTime
 end
 
 """
-    Dates.periods(::CompoundPeriod) -> Vector{Period}
+    DatesPlus.periods(::CompoundPeriod) -> Vector{Period}
 
 Return the `Vector` of `Period`s that comprise the given `CompoundPeriod`.
 
@@ -217,16 +217,16 @@ will be added together.
 
 # Examples
 ```jldoctest
-julia> Dates.CompoundPeriod(Dates.Hour(12), Dates.Hour(13))
+julia> DatesPlus.CompoundPeriod(DatesPlus.Hour(12), DatesPlus.Hour(13))
 25 hours
 
-julia> Dates.CompoundPeriod(Dates.Hour(-1), Dates.Minute(1))
+julia> DatesPlus.CompoundPeriod(DatesPlus.Hour(-1), DatesPlus.Minute(1))
 -1 hour, 1 minute
 
-julia> Dates.CompoundPeriod(Dates.Month(1), Dates.Week(-2))
+julia> DatesPlus.CompoundPeriod(DatesPlus.Month(1), DatesPlus.Week(-2))
 1 month, -2 weeks
 
-julia> Dates.CompoundPeriod(Dates.Minute(50000))
+julia> DatesPlus.CompoundPeriod(DatesPlus.Minute(50000))
 50000 minutes
 ```
 """
@@ -250,16 +250,16 @@ Reduces the `CompoundPeriod` into its canonical form by applying the following r
 
 # Examples
 ```jldoctest
-julia> Dates.canonicalize(Dates.CompoundPeriod(Dates.Hour(12), Dates.Hour(13)))
+julia> DatesPlus.canonicalize(DatesPlus.CompoundPeriod(DatesPlus.Hour(12), DatesPlus.Hour(13)))
 1 day, 1 hour
 
-julia> Dates.canonicalize(Dates.CompoundPeriod(Dates.Hour(-1), Dates.Minute(1)))
+julia> DatesPlus.canonicalize(DatesPlus.CompoundPeriod(DatesPlus.Hour(-1), DatesPlus.Minute(1)))
 -59 minutes
 
-julia> Dates.canonicalize(Dates.CompoundPeriod(Dates.Month(1), Dates.Week(-2)))
+julia> DatesPlus.canonicalize(DatesPlus.CompoundPeriod(DatesPlus.Month(1), DatesPlus.Week(-2)))
 1 month, -2 weeks
 
-julia> Dates.canonicalize(Dates.CompoundPeriod(Dates.Minute(50000)))
+julia> DatesPlus.canonicalize(DatesPlus.CompoundPeriod(DatesPlus.Minute(50000)))
 4 weeks, 6 days, 17 hours, 20 minutes
 ```
 """

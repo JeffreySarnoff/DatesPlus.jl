@@ -31,9 +31,9 @@ Base.convert(::Type{DateTime}, dt::Date) = DateTime(UTM(value(dt) * 86400000))
 Base.convert(::Type{Date}, dt::DateTime) = Date(UTD(days(dt)))
 Base.convert(::Type{Time}, dt::DateTime) = Time(Nanosecond((value(dt) % 86400000) * 1000000))
 
-Base.convert(::Type{DateTime},x::Millisecond)  = DateTime(Dates.UTInstant(x))  # Converts Rata Die milliseconds to a DateTime
+Base.convert(::Type{DateTime},x::Millisecond)  = DateTime(DatesPlus.UTInstant(x))  # Converts Rata Die milliseconds to a DateTime
 Base.convert(::Type{Millisecond},dt::DateTime) = Millisecond(value(dt))        # Converts DateTime to Rata Die milliseconds
-Base.convert(::Type{Date},x::Day)  = Date(Dates.UTInstant(x))  # Converts Rata Die days to a Date
+Base.convert(::Type{Date},x::Day)  = Date(DatesPlus.UTInstant(x))  # Converts Rata Die days to a Date
 Base.convert(::Type{Day},dt::Date) = Day(value(dt))            # Converts Date to Rata Die days
 
 ### External Conversions

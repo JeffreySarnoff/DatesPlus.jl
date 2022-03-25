@@ -73,10 +73,9 @@ julia> Date(2013,7)
 julia> Date(2013,7,1)
 2013-07-01
 
-julia> Date(Dates.Year(2013),Dates.Month(7),Dates.Day(1))
 2013-07-01
 
-julia> Date(Dates.Month(7),Dates.Year(2013))
+julia> Date(DatesPlus.Month(7),DatesPlus.Year(2013))
 2013-07-01
 ```
 
@@ -181,13 +180,13 @@ julia> dt2 = Date(2000,2,1)
 
 julia> dump(dt)
 Date
-  instant: Dates.UTInstant{Day}
+  instant: DatesPlus.UTInstant{Day}
     periods: Day
       value: Int64 734562
 
 julia> dump(dt2)
 Date
-  instant: Dates.UTInstant{Day}
+  instant: DatesPlus.UTInstant{Day}
     periods: Day
       value: Int64 730151
 
@@ -234,39 +233,39 @@ field as an integer:
 julia> t = Date(2014, 1, 31)
 2014-01-31
 
-julia> Dates.year(t)
+julia> DatesPlus.year(t)
 2014
 
-julia> Dates.month(t)
+julia> DatesPlus.month(t)
 1
 
-julia> Dates.week(t)
+julia> DatesPlus.week(t)
 5
 
-julia> Dates.day(t)
+julia> DatesPlus.day(t)
 31
 ```
 
 While propercase return the same value in the corresponding [`Period`](@ref) type:
 
 ```jldoctest tdate
-julia> Dates.Year(t)
+julia> DatesPlus.Year(t)
 2014 years
 
-julia> Dates.Day(t)
+julia> DatesPlus.Day(t)
 31 days
 ```
 
 Compound methods are provided because it is more efficient to access multiple fields at the same time than individually:
 
 ```jldoctest tdate
-julia> Dates.yearmonth(t)
+julia> DatesPlus.yearmonth(t)
 (2014, 1)
 
-julia> Dates.monthday(t)
+julia> DatesPlus.monthday(t)
 (1, 31)
 
-julia> Dates.yearmonthday(t)
+julia> DatesPlus.yearmonthday(t)
 (2014, 1, 31)
 ```
 
@@ -275,14 +274,14 @@ One may also access the underlying `UTInstant` or integer value:
 ```jldoctest tdate
 julia> dump(t)
 Date
-  instant: Dates.UTInstant{Day}
+  instant: DatesPlus.UTInstant{Day}
     periods: Day
       value: Int64 735264
 
 julia> t.instant
-Dates.UTInstant{Day}(Day(735264))
+DatesPlus.UTInstant{Day}(Day(735264))
 
-julia> Dates.value(t)
+julia> DatesPlus.value(t)
 735264
 ```
 
@@ -295,39 +294,39 @@ about the day of the week:
 julia> t = Date(2014, 1, 31)
 2014-01-31
 
-julia> Dates.dayofweek(t)
+julia> DatesPlus.dayofweek(t)
 5
 
-julia> Dates.dayname(t)
+julia> DatesPlus.dayname(t)
 "Friday"
 
-julia> Dates.dayofweekofmonth(t) # 5th Friday of January
+julia> DatesPlus.dayofweekofmonth(t) # 5th Friday of January
 5
 ```
 
 Month of the year:
 
 ```jldoctest tdate2
-julia> Dates.monthname(t)
+julia> DatesPlus.monthname(t)
 "January"
 
-julia> Dates.daysinmonth(t)
+julia> DatesPlus.daysinmonth(t)
 31
 ```
 
 As well as information about the [`TimeType`](@ref)'s year and quarter:
 
 ```jldoctest tdate2
-julia> Dates.isleapyear(t)
+julia> DatesPlus.isleapyear(t)
 false
 
-julia> Dates.dayofyear(t)
+julia> DatesPlus.dayofyear(t)
 31
 
-julia> Dates.quarterofyear(t)
+julia> DatesPlus.quarterofyear(t)
 1
 
-julia> Dates.dayofquarter(t)
+julia> DatesPlus.dayofquarter(t)
 31
 ```
 
@@ -346,19 +345,19 @@ julia> french_monts_abbrev = ["janv","févr","mars","avril","mai","juin",
 
 julia> french_days = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"];
 
-julia> Dates.LOCALES["french"] = Dates.DateLocale(french_months, french_monts_abbrev, french_days, [""]);
+julia> DatesPlus.LOCALES["french"] = DatesPlus.DateLocale(french_months, french_monts_abbrev, french_days, [""]);
 ```
 
  The above mentioned functions can then be used to perform the queries:
 
 ```jldoctest tdate2
-julia> Dates.dayname(t;locale="french")
+julia> DatesPlus.dayname(t;locale="french")
 "vendredi"
 
-julia> Dates.monthname(t;locale="french")
+julia> DatesPlus.monthname(t;locale="french")
 "janvier"
 
-julia> Dates.monthabbr(t;locale="french")
+julia> DatesPlus.monthabbr(t;locale="french")
 "janv"
 ```
 
@@ -366,7 +365,7 @@ Since the abbreviated versions of the days are not loaded, trying to use the
 function `dayabbr` will error.
 
 ```jldoctest tdate2
-julia> Dates.dayabbr(t;locale="french")
+julia> DatesPlus.dayabbr(t;locale="french")
 ERROR: BoundsError: attempt to access 1-element Vector{String} at index [5]
 Stacktrace:
 [...]
@@ -402,10 +401,10 @@ of this approach is a loss in associativity when a specific ordering is forced (
 in different orders results in different outcomes). For example:
 
 ```jldoctest
-julia> (Date(2014,1,29)+Dates.Day(1)) + Dates.Month(1)
+julia> (Date(2014,1,29)+DatesPlus.Day(1)) + DatesPlus.Month(1)
 2014-02-28
 
-julia> (Date(2014,1,29)+Dates.Month(1)) + Dates.Day(1)
+julia> (Date(2014,1,29)+DatesPlus.Month(1)) + DatesPlus.Day(1)
 2014-03-01
 ```
 
@@ -419,10 +418,10 @@ first, then `Month`, then `Week`, etc. Hence the following *does* result in asso
 Just Works:
 
 ```jldoctest
-julia> Date(2014,1,29) + Dates.Day(1) + Dates.Month(1)
+julia> Date(2014,1,29) + DatesPlus.Day(1) + DatesPlus.Month(1)
 2014-03-01
 
-julia> Date(2014,1,29) + Dates.Month(1) + Dates.Day(1)
+julia> Date(2014,1,29) + DatesPlus.Month(1) + DatesPlus.Day(1)
 2014-03-01
 ```
 
@@ -447,7 +446,7 @@ julia> collect(dr)
  2014-02-02
  2014-02-03
 
-julia> dr = Date(2014,1,29):Dates.Month(1):Date(2014,07,29)
+julia> dr = Date(2014,1,29):DatesPlus.Month(1):Date(2014,07,29)
 Date("2014-01-29"):Month(1):Date("2014-07-29")
 
 julia> collect(dr)
@@ -475,13 +474,13 @@ with the first and last of weeks, months, quarters, and years. They each take a 
 as input and return or *adjust to* the first or last of the desired period relative to the input.
 
 ```jldoctest
-julia> Dates.firstdayofweek(Date(2014,7,16)) # Adjusts the input to the Monday of the input's week
+julia> DatesPlus.firstdayofweek(Date(2014,7,16)) # Adjusts the input to the Monday of the input's week
 2014-07-14
 
-julia> Dates.lastdayofmonth(Date(2014,7,16)) # Adjusts to the last day of the input's month
+julia> DatesPlus.lastdayofmonth(Date(2014,7,16)) # Adjusts to the last day of the input's month
 2014-07-31
 
-julia> Dates.lastdayofquarter(Date(2014,7,16)) # Adjusts to the last day of the input's quarter
+julia> DatesPlus.lastdayofquarter(Date(2014,7,16)) # Adjusts to the last day of the input's quarter
 2014-09-30
 ```
 
@@ -493,23 +492,23 @@ adjustment criterion.
 For example:
 
 ```jldoctest
-julia> istuesday = x->Dates.dayofweek(x) == Dates.Tuesday; # Returns true if the day of the week of x is Tuesday
+julia> istuesday = x->DatesPlus.dayofweek(x) == DatesPlus.Tuesday; # Returns true if the day of the week of x is Tuesday
 
-julia> Dates.tonext(istuesday, Date(2014,7,13)) # 2014-07-13 is a Sunday
+julia> DatesPlus.tonext(istuesday, Date(2014,7,13)) # 2014-07-13 is a Sunday
 2014-07-15
 
-julia> Dates.tonext(Date(2014,7,13), Dates.Tuesday) # Convenience method provided for day of the week adjustments
+julia> DatesPlus.tonext(Date(2014,7,13), DatesPlus.Tuesday) # Convenience method provided for day of the week adjustments
 2014-07-15
 ```
 
 This is useful with the do-block syntax for more complex temporal expressions:
 
 ```jldoctest
-julia> Dates.tonext(Date(2014,7,13)) do x
+julia> DatesPlus.tonext(Date(2014,7,13)) do x
            # Return true on the 4th Thursday of November (Thanksgiving)
-           Dates.dayofweek(x) == Dates.Thursday &&
-           Dates.dayofweekofmonth(x) == 4 &&
-           Dates.month(x) == Dates.November
+           DatesPlus.dayofweek(x) == DatesPlus.Thursday &&
+           DatesPlus.dayofweekofmonth(x) == 4 &&
+           DatesPlus.month(x) == DatesPlus.November
        end
 2014-11-27
 ```
@@ -520,12 +519,12 @@ range:
 ```jldoctest
 # Pittsburgh street cleaning; Every 2nd Tuesday from April to November
 # Date range from January 1st, 2014 to January 1st, 2015
-julia> dr = Dates.Date(2014):Day(1):Dates.Date(2015);
+julia> dr = DatesPlus.Date(2014):Day(1):DatesPlus.Date(2015);
 
 julia> filter(dr) do x
-           Dates.dayofweek(x) == Dates.Tue &&
-           Dates.April <= Dates.month(x) <= Dates.Nov &&
-           Dates.dayofweekofmonth(x) == 2
+           DatesPlus.dayofweek(x) == DatesPlus.Tue &&
+           DatesPlus.April <= DatesPlus.month(x) <= DatesPlus.Nov &&
+           DatesPlus.dayofweekofmonth(x) == 2
        end
 8-element Vector{Date}:
  2014-04-08
@@ -548,16 +547,16 @@ Or a year could represent 365 or 366 days in the case of a leap year. [`Period`]
 simple [`Int64`](@ref) wrappers and are constructed by wrapping any `Int64` convertible type, i.e. `Year(1)`
 or `Month(3.0)`. Arithmetic between [`Period`](@ref) of the same type behave like integers, and
 limited `Period-Real` arithmetic is available.  You can extract the underlying integer with
-[`Dates.value`](@ref).
+[`DatesPlus.value`](@ref).
 
 ```jldoctest
-julia> y1 = Dates.Year(1)
+julia> y1 = DatesPlus.Year(1)
 1 year
 
-julia> y2 = Dates.Year(2)
+julia> y2 = DatesPlus.Year(2)
 2 years
 
-julia> y3 = Dates.Year(10)
+julia> y3 = DatesPlus.Year(10)
 10 years
 
 julia> y1 + y2
@@ -575,18 +574,18 @@ julia> y3 % y2
 julia> div(y3,3) # mirrors integer division
 3 years
 
-julia> Dates.value(Dates.Millisecond(10))
+julia> DatesPlus.value(DatesPlus.Millisecond(10))
 10
 ```
 
 Representing periods or durations that are not integer multiples of the basic types can be achieved
-with the [`Dates.CompoundPeriod`](@ref) type. Compound periods may be constructed manually from simple
+with the [`DatesPlus.CompoundPeriod`](@ref) type. Compound periods may be constructed manually from simple
 [`Period`](@ref) types. Additionally, the [`canonicalize`](@ref) function can be used to break down a
-period into a [`Dates.CompoundPeriod`](@ref). This is particularly useful to convert a duration, e.g.,
+period into a [`DatesPlus.CompoundPeriod`](@ref). This is particularly useful to convert a duration, e.g.,
 a difference of two `DateTime`, into a more convenient representation.
 
 ```jldoctest
-julia> cp = Dates.CompoundPeriod(Day(1),Minute(1))
+julia> cp = DatesPlus.CompoundPeriod(Day(1),Minute(1))
 1 day, 1 minute
 
 julia> t1 = DateTime(2018,8,8,16,58,00)
@@ -605,13 +604,13 @@ julia> canonicalize(t2-t1) # creates a CompoundPeriod
 month or 15 minutes) with [`floor`](@ref), [`ceil`](@ref), or [`round`](@ref):
 
 ```jldoctest
-julia> floor(Date(1985, 8, 16), Dates.Month)
+julia> floor(Date(1985, 8, 16), DatesPlus.Month)
 1985-08-01
 
-julia> ceil(DateTime(2013, 2, 13, 0, 31, 20), Dates.Minute(15))
+julia> ceil(DateTime(2013, 2, 13, 0, 31, 20), DatesPlus.Minute(15))
 2013-02-13T00:45:00
 
-julia> round(DateTime(2016, 8, 6, 20, 15), Dates.Day)
+julia> round(DateTime(2016, 8, 6, 20, 15), DatesPlus.Day)
 2016-08-07T00:00:00
 ```
 
@@ -625,13 +624,13 @@ behaviour is not obvious.
 
 ### Rounding Epoch
 
-In many cases, the resolution specified for rounding (e.g., `Dates.Second(30)`) divides evenly
-into the next largest period (in this case, `Dates.Minute(1)`). But rounding behaviour in cases
+In many cases, the resolution specified for rounding (e.g., `DatesPlus.Second(30)`) divides evenly
+into the next largest period (in this case, `DatesPlus.Minute(1)`). But rounding behaviour in cases
 in which this is not true may lead to confusion. What is the expected result of rounding a [`DateTime`](@ref)
 to the nearest 10 hours?
 
 ```jldoctest
-julia> round(DateTime(2016, 7, 17, 11, 55), Dates.Hour(10))
+julia> round(DateTime(2016, 7, 17, 11, 55), DatesPlus.Hour(10))
 2016-07-17T12:00:00
 ```
 
@@ -653,13 +652,13 @@ first week of year 0000, as defined by ISO 8601) as the base when rounding to a 
 
 Here is a related case in which the expected behaviour is not necessarily obvious: What happens
 when we round to the nearest `P(2)`, where `P` is a [`Period`](@ref) type? In some cases (specifically,
-when `P <: Dates.TimePeriod`) the answer is clear:
+when `P <: DatesPlus.TimePeriod`) the answer is clear:
 
 ```jldoctest
-julia> round(DateTime(2016, 7, 17, 8, 55, 30), Dates.Hour(2))
+julia> round(DateTime(2016, 7, 17, 8, 55, 30), DatesPlus.Hour(2))
 2016-07-17T08:00:00
 
-julia> round(DateTime(2016, 7, 17, 8, 55, 30), Dates.Minute(2))
+julia> round(DateTime(2016, 7, 17, 8, 55, 30), DatesPlus.Minute(2))
 2016-07-17T08:56:00
 ```
 
@@ -668,7 +667,7 @@ order period. But in the case of two months (which still divides evenly into one
 may be surprising:
 
 ```jldoctest
-julia> round(DateTime(2016, 7, 17, 8, 55, 30), Dates.Month(2))
+julia> round(DateTime(2016, 7, 17, 8, 55, 30), DatesPlus.Month(2))
 2016-07-01T00:00:00
 ```
 
@@ -691,123 +690,123 @@ on methods exported from the `Dates` module.
 ## Dates and Time Types
 
 ```@docs
-Dates.Period
-Dates.CompoundPeriod
-Dates.Instant
-Dates.UTInstant
-Dates.TimeType
-Dates.DateTime
-Dates.Date
-Dates.Time
-Dates.TimeZone
-Dates.UTC
+DatesPlus.Period
+DatesPlus.CompoundPeriod
+DatesPlus.Instant
+DatesPlus.UTInstant
+DatesPlus.TimeType
+DatesPlus.DateTime
+DatesPlus.Date
+DatesPlus.Time
+DatesPlus.TimeZone
+DatesPlus.UTC
 ```
 
 ## Dates Functions
 
 ```@docs
-Dates.DateTime(::Int64, ::Int64, ::Int64, ::Int64, ::Int64, ::Int64, ::Int64)
-Dates.DateTime(::Dates.Period)
-Dates.DateTime(::Function, ::Any...)
-Dates.DateTime(::Dates.TimeType)
-Dates.DateTime(::AbstractString, ::AbstractString)
-Dates.format(::Dates.TimeType, ::AbstractString)
-Dates.DateFormat
-Dates.@dateformat_str
-Dates.DateTime(::AbstractString, ::Dates.DateFormat)
-Dates.Date(::Int64, ::Int64, ::Int64)
-Dates.Date(::Dates.Period)
-Dates.Date(::Function, ::Any, ::Any, ::Any)
-Dates.Date(::Dates.TimeType)
-Dates.Date(::AbstractString, ::AbstractString)
-Dates.Date(::AbstractString, ::Dates.DateFormat)
-Dates.Time(::Int64::Int64, ::Int64, ::Int64, ::Int64, ::Int64)
-Dates.Time(::Dates.TimePeriod)
-Dates.Time(::Function, ::Any...)
-Dates.Time(::Dates.DateTime)
-Dates.Time(::AbstractString, ::AbstractString)
-Dates.Time(::AbstractString, ::Dates.DateFormat)
-Dates.now()
-Dates.now(::Type{Dates.UTC})
+DatesPlus.DateTime(::Int64, ::Int64, ::Int64, ::Int64, ::Int64, ::Int64, ::Int64)
+DatesPlus.DateTime(::DatesPlus.Period)
+DatesPlus.DateTime(::Function, ::Any...)
+DatesPlus.DateTime(::DatesPlus.TimeType)
+DatesPlus.DateTime(::AbstractString, ::AbstractString)
+DatesPlus.format(::DatesPlus.TimeType, ::AbstractString)
+DatesPlus.DateFormat
+DatesPlus.@dateformat_str
+DatesPlus.DateTime(::AbstractString, ::DatesPlus.DateFormat)
+DatesPlus.Date(::Int64, ::Int64, ::Int64)
+DatesPlus.Date(::DatesPlus.Period)
+DatesPlus.Date(::Function, ::Any, ::Any, ::Any)
+DatesPlus.Date(::DatesPlus.TimeType)
+DatesPlus.Date(::AbstractString, ::AbstractString)
+DatesPlus.Date(::AbstractString, ::DatesPlus.DateFormat)
+DatesPlus.Time(::Int64::Int64, ::Int64, ::Int64, ::Int64, ::Int64)
+DatesPlus.Time(::DatesPlus.TimePeriod)
+DatesPlus.Time(::Function, ::Any...)
+DatesPlus.Time(::DatesPlus.DateTime)
+DatesPlus.Time(::AbstractString, ::AbstractString)
+DatesPlus.Time(::AbstractString, ::DatesPlus.DateFormat)
+DatesPlus.now()
+DatesPlus.now(::Type{DatesPlus.UTC})
 Base.eps(::Union{Type{DateTime}, Type{Date}, Type{Time}, TimeType})
 ```
 
 ### Accessor Functions
 
 ```@docs
-Dates.year
-Dates.month
-Dates.week
-Dates.day
-Dates.hour
-Dates.minute
-Dates.second
-Dates.millisecond
-Dates.microsecond
-Dates.nanosecond
-Dates.Year(::Dates.TimeType)
-Dates.Month(::Dates.TimeType)
-Dates.Week(::Dates.TimeType)
-Dates.Day(::Dates.TimeType)
-Dates.Hour(::DateTime)
-Dates.Minute(::DateTime)
-Dates.Second(::DateTime)
-Dates.Millisecond(::DateTime)
-Dates.Microsecond(::Dates.Time)
-Dates.Nanosecond(::Dates.Time)
-Dates.yearmonth
-Dates.monthday
-Dates.yearmonthday
+DatesPlus.year
+DatesPlus.month
+DatesPlus.week
+DatesPlus.day
+DatesPlus.hour
+DatesPlus.minute
+DatesPlus.second
+DatesPlus.millisecond
+DatesPlus.microsecond
+DatesPlus.nanosecond
+DatesPlus.Year(::DatesPlus.TimeType)
+DatesPlus.Month(::DatesPlus.TimeType)
+DatesPlus.Week(::DatesPlus.TimeType)
+DatesPlus.Day(::DatesPlus.TimeType)
+DatesPlus.Hour(::DateTime)
+DatesPlus.Minute(::DateTime)
+DatesPlus.Second(::DateTime)
+DatesPlus.Millisecond(::DateTime)
+DatesPlus.Microsecond(::DatesPlus.Time)
+DatesPlus.Nanosecond(::DatesPlus.Time)
+DatesPlus.yearmonth
+DatesPlus.monthday
+DatesPlus.yearmonthday
 ```
 
 ### Query Functions
 
 ```@docs
-Dates.dayname
-Dates.dayabbr
-Dates.dayofweek
-Dates.dayofmonth
-Dates.dayofweekofmonth
-Dates.daysofweekinmonth
-Dates.monthname
-Dates.monthabbr
-Dates.daysinmonth
-Dates.isleapyear
-Dates.dayofyear
-Dates.daysinyear
-Dates.quarterofyear
-Dates.dayofquarter
+DatesPlus.dayname
+DatesPlus.dayabbr
+DatesPlus.dayofweek
+DatesPlus.dayofmonth
+DatesPlus.dayofweekofmonth
+DatesPlus.daysofweekinmonth
+DatesPlus.monthname
+DatesPlus.monthabbr
+DatesPlus.daysinmonth
+DatesPlus.isleapyear
+DatesPlus.dayofyear
+DatesPlus.daysinyear
+DatesPlus.quarterofyear
+DatesPlus.dayofquarter
 ```
 
 ### Adjuster Functions
 
 ```@docs
-Base.trunc(::Dates.TimeType, ::Type{Dates.Period})
-Dates.firstdayofweek
-Dates.lastdayofweek
-Dates.firstdayofmonth
-Dates.lastdayofmonth
-Dates.firstdayofyear
-Dates.lastdayofyear
-Dates.firstdayofquarter
-Dates.lastdayofquarter
-Dates.tonext(::Dates.TimeType, ::Int)
-Dates.toprev(::Dates.TimeType, ::Int)
-Dates.tofirst
-Dates.tolast
-Dates.tonext(::Function, ::Dates.TimeType)
-Dates.toprev(::Function, ::Dates.TimeType)
+Base.trunc(::DatesPlus.TimeType, ::Type{DatesPlus.Period})
+DatesPlus.firstdayofweek
+DatesPlus.lastdayofweek
+DatesPlus.firstdayofmonth
+DatesPlus.lastdayofmonth
+DatesPlus.firstdayofyear
+DatesPlus.lastdayofyear
+DatesPlus.firstdayofquarter
+DatesPlus.lastdayofquarter
+DatesPlus.tonext(::DatesPlus.TimeType, ::Int)
+DatesPlus.toprev(::DatesPlus.TimeType, ::Int)
+DatesPlus.tofirst
+DatesPlus.tolast
+DatesPlus.tonext(::Function, ::DatesPlus.TimeType)
+DatesPlus.toprev(::Function, ::DatesPlus.TimeType)
 ```
 
 ### Periods
 
 ```@docs
-Dates.Period(::Any)
-Dates.CompoundPeriod(::Vector{<:Dates.Period})
-Dates.canonicalize
-Dates.value
-Dates.default
-Dates.periods
+DatesPlus.Period(::Any)
+DatesPlus.CompoundPeriod(::Vector{<:DatesPlus.Period})
+DatesPlus.canonicalize
+DatesPlus.value
+DatesPlus.default
+DatesPlus.periods
 ```
 
 ### Rounding Functions
@@ -816,39 +815,39 @@ Dates.periods
 with `floor`, `ceil`, or `round`.
 
 ```@docs
-Base.floor(::Dates.TimeType, ::Dates.Period)
-Base.ceil(::Dates.TimeType, ::Dates.Period)
-Base.round(::Dates.TimeType, ::Dates.Period, ::RoundingMode{:NearestTiesUp})
+Base.floor(::DatesPlus.TimeType, ::DatesPlus.Period)
+Base.ceil(::DatesPlus.TimeType, ::DatesPlus.Period)
+Base.round(::DatesPlus.TimeType, ::DatesPlus.Period, ::RoundingMode{:NearestTiesUp})
 ```
 
 Most `Period` values can also be rounded to a specified resolution:
 
 ```@docs
-Base.floor(::Dates.ConvertiblePeriod, ::T) where T <: Dates.ConvertiblePeriod
-Base.ceil(::Dates.ConvertiblePeriod, ::Dates.ConvertiblePeriod)
-Base.round(::Dates.ConvertiblePeriod, ::Dates.ConvertiblePeriod, ::RoundingMode{:NearestTiesUp})
+Base.floor(::DatesPlus.ConvertiblePeriod, ::T) where T <: DatesPlus.ConvertiblePeriod
+Base.ceil(::DatesPlus.ConvertiblePeriod, ::DatesPlus.ConvertiblePeriod)
+Base.round(::DatesPlus.ConvertiblePeriod, ::DatesPlus.ConvertiblePeriod, ::RoundingMode{:NearestTiesUp})
 ```
 
 The following functions are not exported:
 
 ```@docs
-Dates.floorceil
-Dates.epochdays2date
-Dates.epochms2datetime
-Dates.date2epochdays
-Dates.datetime2epochms
+DatesPlus.floorceil
+DatesPlus.epochdays2date
+DatesPlus.epochms2datetime
+DatesPlus.date2epochdays
+DatesPlus.datetime2epochms
 ```
 
 ### Conversion Functions
 
 ```@docs
-Dates.today
-Dates.unix2datetime
-Dates.datetime2unix
-Dates.julian2datetime
-Dates.datetime2julian
-Dates.rata2datetime
-Dates.datetime2rata
+DatesPlus.today
+DatesPlus.unix2datetime
+DatesPlus.datetime2unix
+DatesPlus.julian2datetime
+DatesPlus.datetime2julian
+DatesPlus.rata2datetime
+DatesPlus.datetime2rata
 ```
 
 ### Constants
