@@ -33,17 +33,16 @@
 
 ----
 
-
-#### unmodified source files
-
-- accessors.jl
-- adjusters.jl
-- arithmetic.jl
-- conversions.jl
-- deprecated.jl
-- parse.jl
-- ranges.jl
-- rounding.jl
-- types.jl
+| unmodified     | augmented     |
+|----------------|---------------|
+| accessors.jl   |  io.jl        |             
+| adjusters.jl   |  periods.jl   |
+| arithmetic.jl  |               |
+| conversions.jl |               |
+| deprecated.jl  |               |
+| parse.jl       |               |
+| ranges.jl      |               | 
+| rounding.jl    |               |
+| types.jl       |               |
 
 
