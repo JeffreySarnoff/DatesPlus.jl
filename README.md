@@ -1,5 +1,5 @@
 # DatesPlus.jl
-Experimental variant of the `Dates` stdlib that supports version 2 of TimesDates.jl
+**Experimental version of the `Dates` stdlib supporting version 2 of TimesDates.jl**
 
 ----
 
