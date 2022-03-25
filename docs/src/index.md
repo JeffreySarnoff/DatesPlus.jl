@@ -73,6 +73,7 @@ julia> Date(2013,7)
 julia> Date(2013,7,1)
 2013-07-01
 
+julia> Date(DatesPlus.Year(2013),DatesPlus.Month(7),DatesPlus.Day(1))
 2013-07-01
 
 julia> Date(DatesPlus.Month(7),DatesPlus.Year(2013))
