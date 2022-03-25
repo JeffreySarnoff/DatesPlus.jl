@@ -30,7 +30,7 @@ julia> d2-d1
 Please see the manual section on [`Date`](@ref) and [`DateTime`](@ref)
 for more information.
 """
-module Dates
+module DatesPlus
 
 import Base: ==, isless, div, fld, mod, rem, gcd, lcm, +, -, *, /, %, broadcast
 using Printf: @sprintf
